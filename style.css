@@ -1,0 +1,454 @@
+/* =====================
+   RESET & BASE
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d1d0d0;
+    color: #f0f0f3;
+}
+
+/* =====================
+   HEADER
+===================== */
+header {
+    background-color: #5b86f2;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 15px;
+}
+
+/* =====================
+   NAVIGATION
+===================== */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.nav-btn.actif {
+    background-color: white;
+    color: #6c3483;
+    font-weight: bold;
+}
+
+.nav-btn:hover {
+    background-color: rgba(230, 227, 227, 0.915);
+}
+
+/* =====================
+   SECTIONS
+===================== */
+.section {
+    display: none;
+    padding: 30px;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-titre {
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+/* =====================
+   CARTES DASHBOARD
+===================== */
+#resume {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.carte {
+    background-color: #f2eded;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.carte h2 {
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.carte p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#carte-revenus p  { color: #27ae60; }
+#carte-depenses p { color: #e74c3c; }
+#carte-solde p    { color: #2980b9; }
+
+/* =====================
+   BLOCS COMPTE
+===================== */
+.compte-bloc {
+    background-color: #5b86f2;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.compte-titre {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* =====================
+   FORMULAIRES
+===================== */
+.formulaire-ajout {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.formulaire-ajout input,
+.formulaire-ajout select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+    font-size: 14px;
+}
+
+.formulaire-ajout input[type="text"]   { width: 200px; }
+.formulaire-ajout input[type="number"] { width: 120px; }
+
+.formulaire-ajout button {
+    padding: 8px 16px;
+    background-color: #6c3483;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.formulaire-ajout button:hover {
+    background-color: #8e44ad;
+}
+
+/* =====================
+   BARRE DE RECHERCHE
+===================== */
+.barre-recherche {
+    margin-bottom: 10px;
+}
+
+.barre-recherche input {
+    width: 300px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #3a3a3a;
+    background-color: #2c2c2c;
+    color: white;
+    font-size: 14px;
+}
+
+.barre-recherche input:focus {
+    outline: none;
+    border-color: #6c3483;
+}
+
+/* =====================
+   TABLEAUX
+===================== */
+.table-recurrents {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-recurrents th,
+.table-recurrents td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.table-recurrents th {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.table-recurrents tr:hover td {
+    background-color: #333;
+}
+
+.col-triable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.col-triable:hover {
+    color: #8e44ad;
+}
+
+/* =====================
+   BADGES
+===================== */
+.badge-recette {
+    background-color: #1e8449;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge-depense {
+    background-color: #922b21;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge-categorie {
+    background-color: #1a5276;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* =====================
+   BOUTONS ACTION
+===================== */
+.btn-modifier {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.btn-supprimer {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* =====================
+   TOTAUX
+===================== */
+.totaux-compte {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #3a3a3a;
+    font-size: 15px;
+    flex-wrap: wrap;
+}
+
+.total-recette strong { color: #27ae60; }
+.total-depense strong { color: #e74c3c; }
+.total-solde strong   { color: #2980b9; }
+
+.totaux-prev {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed #444;
+    opacity: 0.75;
+    font-style: italic;
+}
+
+/* =====================
+   MOIS HEADER
+===================== */
+.mois-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.mois-header select,
+.mois-header input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #3a3a3a;
+    color: white;
+    font-size: 15px;
+}
+
+.mois-header button {
+    padding: 8px 16px;
+    background-color: #6c3483;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.mois-header button:hover {
+    background-color: #8e44ad;
+}
+
+/* =====================
+   BILAN DASHBOARD
+===================== */
+.bilan-mois {
+    background-color: #5b86f2;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.bilan-mois h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #aaa;
+}
+
+.bilan-mois-comptes {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.bilan-compte {
+    background-color: #3a3a3a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    min-width: 180px;
+}
+
+.bilan-compte h4 {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.bilan-compte p {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.bilan-global {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #444;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-supprimer-mois {
+    float: right;
+    background: none;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.btn-supprimer-mois:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* =====================
+   PARAMÈTRES - CATÉGORIES
+===================== */
+.groupe-categorie {
+    margin-bottom: 20px;
+}
+
+.groupe-titre {
+    color: #8e44ad;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.categorie-ligne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.categorie-ligne:hover {
+    background-color: #3a3a3a;
+}
+
+/* Graphiques */
+.graphique-container {
+    margin-top: 20px;
+    max-width: 400px;
+}
+
+.graphiques-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.graphique-bloc {
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.graphique-bloc h4 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #aaa;
+}
+
+.sous-titre {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #ccc;
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Budget</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>💰 Mon Budget</h1>
+        <nav>
+            <button class="nav-btn actif" data-section="dashboard">📊 Tableau de bord</button>
+            <button class="nav-btn" data-section="recurrents">📋 Récurrents</button>
+            <button class="nav-btn" data-section="mois">📅 Mois en cours</button>
+            <button class="nav-btn" data-section="parametres">⚙️ Paramètres</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- TABLEAU DE BORD -->
+        <section id="dashboard" class="section active">
+            <div id="resume">
+                <div class="carte" id="carte-revenus">
+                    <h2>Revenus</h2>
+                    <p id="total-revenus">0 €</p>
+                </div>
+                <div class="carte" id="carte-depenses">
+                    <h2>Dépenses</h2>
+                    <p id="total-depenses">0 €</p>
+                </div>
+                <div class="carte" id="carte-solde">
+                    <h2>Solde</h2>
+                    <p id="total-solde">0 €</p>
+                </div>
+            </div>
+            <h2 class="section-titre" style="margin-top: 30px;">📅 Bilan par mois</h2>
+            <div id="bilan-mois-liste"></div>
+
+            <h2 class="section-titre" style="margin-top: 30px;">📈 Graphiques</h2>
+
+<!-- CAMEMBERTS DÉPENSES PAR CATÉGORIE -->
+<h3 class="sous-titre">🥧 Répartition des dépenses par catégorie</h3>
+<div class="graphiques-row">
+    <div class="graphique-bloc">
+        <h4>🟡 Crédit Agricole</h4>
+        <canvas id="dash-chart-ca"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🔵 BNP</h4>
+        <canvas id="dash-chart-bnp"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🟢 Compte Joint</h4>
+        <canvas id="dash-chart-joint"></canvas>
+    </div>
+</div>
+
+<!-- COURBES ÉVOLUTION SOLDE -->
+<h3 class="sous-titre" style="margin-top: 30px;">📈 Évolution du solde sur le mois</h3>
+<div class="graphiques-row">
+    <div class="graphique-bloc">
+        <h4>🟡 Crédit Agricole</h4>
+        <canvas id="dash-courbe-ca"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🔵 BNP</h4>
+        <canvas id="dash-courbe-bnp"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🟢 Compte Joint</h4>
+        <canvas id="dash-courbe-joint"></canvas>
+    </div>
+</div>
+
+<!-- COMPARATIF PRÉVISIONNEL VS RÉEL -->
+<h3 class="sous-titre" style="margin-top: 30px;">📊 Prévisionnel vs Réel</h3>
+<div class="graphiques-row">
+    <div class="graphique-bloc">
+        <h4>🟡 Crédit Agricole</h4>
+        <canvas id="dash-barre-ca"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🔵 BNP</h4>
+        <canvas id="dash-barre-bnp"></canvas>
+    </div>
+    <div class="graphique-bloc">
+        <h4>🟢 Compte Joint</h4>
+        <canvas id="dash-barre-joint"></canvas>
+    </div>
+</div>
+        </section>
+
+        <!-- RÉCURRENTS -->
+        <section id="recurrents" class="section">
+            <h2 class="section-titre">📋 Charges et revenus récurrents</h2>
+
+            <!-- COMPTE CA -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🟡 Crédit Agricole</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="ca-libelle" placeholder="Libellé (ex: Salaire)">
+                    <input type="number" id="ca-montant" placeholder="Montant (€)">
+                    <select id="ca-categorie"></select>
+                    <select id="ca-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterRecurrent('ca')">+ Ajouter</button>
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Catégorie</th>
+                            <th>Type</th>
+                            <th>Montant</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liste-ca"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="ca-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="ca-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="ca-solde">0 €</strong></span>
+                </div>
+                <div class="graphique-container">
+    <canvas id="chart-ca"></canvas>
+</div>
+            </div>
+
+            <!-- COMPTE BNP -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🔵 BNP</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="bnp-libelle" placeholder="Libellé (ex: Salaire)">
+                    <input type="number" id="bnp-montant" placeholder="Montant (€)">
+                    <select id="bnp-categorie"></select>
+                    <select id="bnp-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterRecurrent('bnp')">+ Ajouter</button>
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Catégorie</th>
+                            <th>Type</th>
+                            <th>Montant</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liste-bnp"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="bnp-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="bnp-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="bnp-solde">0 €</strong></span>
+                </div>
+                <div class="graphique-container">
+    <canvas id="chart-bnp"></canvas>
+</div>
+            </div>
+
+            <!-- COMPTE JOINT -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🟢 Compte Joint BNP</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="joint-libelle" placeholder="Libellé (ex: Loyer)">
+                    <input type="number" id="joint-montant" placeholder="Montant (€)">
+                    <select id="joint-categorie"></select>
+                    <select id="joint-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterRecurrent('joint')">+ Ajouter</button>
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Catégorie</th>
+                            <th>Type</th>
+                            <th>Montant</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liste-joint"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="joint-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="joint-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="joint-solde">0 €</strong></span>
+                </div>
+                <div class="graphique-container">
+    <canvas id="chart-joint"></canvas>
+</div>
+            </div>
+
+        </section>
+
+        <!-- MOIS EN COURS -->
+        <section id="mois" class="section">
+            <h2 class="section-titre">📅 Mois en cours</h2>
+
+            <div class="mois-header">
+                <select id="selecteur-mois"></select>
+                <select id="choix-mois">
+                    <option value="1">Janvier</option>
+                    <option value="2">Février</option>
+                    <option value="3">Mars</option>
+                    <option value="4">Avril</option>
+                    <option value="5">Mai</option>
+                    <option value="6">Juin</option>
+                    <option value="7">Juillet</option>
+                    <option value="8">Août</option>
+                    <option value="9">Septembre</option>
+                    <option value="10">Octobre</option>
+                    <option value="11">Novembre</option>
+                    <option value="12">Décembre</option>
+                </select>
+                <input type="number" id="choix-annee" value="2026" min="2020" max="2030" style="width:80px; padding:8px; border-radius:6px; border:none; background:#3a3a3a; color:white;">
+                <button onclick="creerNouveauMois()">+ Nouveau mois</button>
+            </div>
+
+            <!-- COMPTE CA -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🟡 Crédit Agricole</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="mois-ca-libelle" placeholder="Libellé">
+                    <input type="text" id="mois-ca-date" placeholder="JJ/MM/AAAA" maxlength="10" style="width:110px">
+                    <input type="number" id="mois-ca-montant" placeholder="Montant (€)">
+                    <select id="mois-ca-categorie"></select>
+                    <select id="mois-ca-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterLigneMois('ca')">+ Ajouter</button>
+                </div>
+                <div class="barre-recherche">
+                    <input type="text" id="recherche-ca" placeholder="🔍 Rechercher..." oninput="filtrerLignes('ca')">
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th onclick="trierLignes('ca', 'date')" class="col-triable">Date <span id="tri-ca-date">↕</span></th>
+                            <th onclick="trierLignes('ca', 'libelle')" class="col-triable">Libellé <span id="tri-ca-libelle">↕</span></th>
+                            <th onclick="trierLignes('ca', 'categorie')" class="col-triable">Catégorie <span id="tri-ca-categorie">↕</span></th>
+                            <th onclick="trierLignes('ca', 'type')" class="col-triable">Type <span id="tri-ca-type">↕</span></th>
+                            <th onclick="trierLignes('ca', 'montant')" class="col-triable">Montant <span id="tri-ca-montant">↕</span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mois-liste-ca"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="mois-ca-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-ca-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-ca-solde">0 €</strong></span>
+                </div>
+                <div class="totaux-compte totaux-prev">
+                    <span>🔮 Prévisionnel —</span>
+                    <span class="total-recette">Recettes : <strong id="mois-ca-recettes-prev">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-ca-depenses-prev">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-ca-solde-prev">0 €</strong></span>
+                </div>
+            </div>
+
+            <!-- COMPTE BNP -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🔵 BNP</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="mois-bnp-libelle" placeholder="Libellé">
+                    <input type="text" id="mois-bnp-date" placeholder="JJ/MM/AAAA" maxlength="10" style="width:110px">
+                    <input type="number" id="mois-bnp-montant" placeholder="Montant (€)">
+                    <select id="mois-bnp-categorie"></select>
+                    <select id="mois-bnp-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterLigneMois('bnp')">+ Ajouter</button>
+                </div>
+                <div class="barre-recherche">
+                    <input type="text" id="recherche-bnp" placeholder="🔍 Rechercher..." oninput="filtrerLignes('bnp')">
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th onclick="trierLignes('bnp', 'date')" class="col-triable">Date <span id="tri-bnp-date">↕</span></th>
+                            <th onclick="trierLignes('bnp', 'libelle')" class="col-triable">Libellé <span id="tri-bnp-libelle">↕</span></th>
+                            <th onclick="trierLignes('bnp', 'categorie')" class="col-triable">Catégorie <span id="tri-bnp-categorie">↕</span></th>
+                            <th onclick="trierLignes('bnp', 'type')" class="col-triable">Type <span id="tri-bnp-type">↕</span></th>
+                            <th onclick="trierLignes('bnp', 'montant')" class="col-triable">Montant <span id="tri-bnp-montant">↕</span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mois-liste-bnp"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="mois-bnp-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-bnp-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-bnp-solde">0 €</strong></span>
+                </div>
+                <div class="totaux-compte totaux-prev">
+                    <span>🔮 Prévisionnel —</span>
+                    <span class="total-recette">Recettes : <strong id="mois-bnp-recettes-prev">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-bnp-depenses-prev">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-bnp-solde-prev">0 €</strong></span>
+                </div>
+            </div>
+
+            <!-- COMPTE JOINT -->
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🟢 Compte Joint BNP</h3>
+                <div class="formulaire-ajout">
+                    <input type="text" id="mois-joint-libelle" placeholder="Libellé">
+                    <input type="text" id="mois-joint-date" placeholder="JJ/MM/AAAA" maxlength="10" style="width:110px">
+                    <input type="number" id="mois-joint-montant" placeholder="Montant (€)">
+                    <select id="mois-joint-categorie"></select>
+                    <select id="mois-joint-type">
+                        <option value="recette">Recette</option>
+                        <option value="depense">Dépense</option>
+                    </select>
+                    <button onclick="ajouterLigneMois('joint')">+ Ajouter</button>
+                </div>
+                <div class="barre-recherche">
+                    <input type="text" id="recherche-joint" placeholder="🔍 Rechercher..." oninput="filtrerLignes('joint')">
+                </div>
+                <table class="table-recurrents">
+                    <thead>
+                        <tr>
+                            <th onclick="trierLignes('joint', 'date')" class="col-triable">Date <span id="tri-joint-date">↕</span></th>
+                            <th onclick="trierLignes('joint', 'libelle')" class="col-triable">Libellé <span id="tri-joint-libelle">↕</span></th>
+                            <th onclick="trierLignes('joint', 'categorie')" class="col-triable">Catégorie <span id="tri-joint-categorie">↕</span></th>
+                            <th onclick="trierLignes('joint', 'type')" class="col-triable">Type <span id="tri-joint-type">↕</span></th>
+                            <th onclick="trierLignes('joint', 'montant')" class="col-triable">Montant <span id="tri-joint-montant">↕</span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mois-liste-joint"></tbody>
+                </table>
+                <div class="totaux-compte">
+                    <span class="total-recette">Recettes : <strong id="mois-joint-recettes">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-joint-depenses">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-joint-solde">0 €</strong></span>
+                </div>
+                <div class="totaux-compte totaux-prev">
+                    <span>🔮 Prévisionnel —</span>
+                    <span class="total-recette">Recettes : <strong id="mois-joint-recettes-prev">0 €</strong></span>
+                    <span class="total-depense">Dépenses : <strong id="mois-joint-depenses-prev">0 €</strong></span>
+                    <span class="total-solde">Solde : <strong id="mois-joint-solde-prev">0 €</strong></span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PARAMÈTRES -->
+        <section id="parametres" class="section">
+            <h2 class="section-titre">⚙️ Paramètres</h2>
+
+            <div class="compte-bloc">
+                <h3 class="compte-titre">🏷️ Gestion des catégories</h3>
+
+                <div class="formulaire-ajout" style="margin-bottom: 20px;">
+                    <select id="param-groupe-existant"></select>
+                    <input type="text" id="param-nouvelle-categorie" placeholder="Nouvelle catégorie">
+                    <button onclick="ajouterCategorie()">+ Ajouter</button>
+                </div>
+
+                <div class="formulaire-ajout" style="margin-bottom: 25px;">
+                    <input type="text" id="param-nouveau-groupe" placeholder="Nouveau groupe (ex: Animaux)">
+                    <input type="text" id="param-categorie-nouveau-groupe" placeholder="Première catégorie">
+                    <button onclick="creerGroupe()">+ Créer groupe</button>
+                </div>
+
+                <div id="liste-categories"></div>
+            </div>
+
+        </section>
+
+    </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
