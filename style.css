@@ -9,8 +9,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #d1d0d0;
-    color: #f0f0f3;
+    background-color: #ffffffe5;
+    color: #5b86f2;
 }
 
 /* =====================
@@ -19,7 +19,7 @@ body {
 header {
     background-color: #5b86f2;
     padding: 20px;
-    text-align: center;
+    text-align: center; color: rgba(241, 237, 237, 0.877);
 }
 
 header h1 {
@@ -90,7 +90,7 @@ nav {
     padding: 20px;
     width: 200px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px #42aaef;
 }
 
 .carte h2 {
@@ -112,7 +112,7 @@ nav {
    BLOCS COMPTE
 ===================== */
 .compte-bloc {
-    background-color: #5b86f2;
+    background-color: #f0f0f2;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 25px;
@@ -328,7 +328,7 @@ nav {
    BILAN DASHBOARD
 ===================== */
 .bilan-mois {
-    background-color: #5b86f2;
+    background-color: #efeff1;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 15px;
@@ -347,10 +347,11 @@ nav {
 }
 
 .bilan-compte {
-    background-color: #3a3a3a;
+    background-color: #efeff1;
     border-radius: 8px;
     padding: 12px 16px;
     min-width: 180px;
+    border: 1px solid #3a3a3a;
 }
 
 .bilan-compte h4 {
@@ -397,7 +398,7 @@ nav {
 }
 
 .groupe-titre {
-    color: #8e44ad;
+    color: #4098f5;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -417,7 +418,7 @@ nav {
 }
 
 .categorie-ligne:hover {
-    background-color: #3a3a3a;
+    background-color: #f0ecec;
 }
 
 /* Graphiques */
@@ -434,7 +435,7 @@ nav {
 }
 
 .graphique-bloc {
-    background-color: #2c2c2c;
+    background-color: #d4d1d1;
     border-radius: 10px;
     padding: 20px;
     flex: 1;
@@ -444,11 +445,11 @@ nav {
 .graphique-bloc h4 {
     font-size: 14px;
     margin-bottom: 15px;
-    color: #aaa;
+    color: #aaaaaa;
 }
 
 .sous-titre {
     font-size: 16px;
     margin-bottom: 15px;
-    color: #ccc;
+    color: #3990ee94;
 }

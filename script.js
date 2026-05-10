@@ -827,7 +827,7 @@ function mettreAJourCamembertDashboard(compte) {
         options: {
             responsive: true,
             plugins: {
-                legend: { position: 'bottom', labels: { color: '#ccc', font: { size: 11 }, padding: 10 } },
+                legend: { position: 'bottom', labels: { color: '#333333', font: { size: 11 }, padding: 10 } },
                 tooltip: { callbacks: { label: ctx => ` ${ctx.label} : ${ctx.parsed.toFixed(2)} €` } }
             }
         }
